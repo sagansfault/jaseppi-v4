@@ -15,6 +15,7 @@ import sh.sagan.jaseppi.command.impl.voice.RepeatCommand;
 import sh.sagan.jaseppi.command.impl.voice.SkipCommand;
 import sh.sagan.jaseppi.command.lib.CommandManager;
 import sh.sagan.jaseppi.command.lib.IntakeDelegator;
+import sh.sagan.jaseppi.function.CursedImageReply;
 
 import java.net.http.HttpClient;
 
@@ -49,6 +50,7 @@ public class Jaseppi {
 
     private void initListeners() {
         api.addMessageCreateListener(new IntakeDelegator(commandManager));
+        api.addMessageCreateListener(new CursedImageReply(this));
         api.addServerVoiceChannelMemberLeaveListener(new DisconnectListener(this));
     }
 
