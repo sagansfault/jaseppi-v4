@@ -22,11 +22,11 @@ public class CursedImageReply implements MessageCreateListener {
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        int rand = ThreadLocalRandom.current().nextInt(1000);
+        int rand = ThreadLocalRandom.current().nextInt(100);
 
         String urlFormat = "https://www.reddit.com/r/%s/%s.json?limit=%s";
 
-        if (rand == 1) {
+        if (rand == 0) {
             HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(String.format(urlFormat, "cursedimages", "hot", "10"))).build();
 
             jaseppi.getHttpClient().sendAsync(request, HttpResponse.BodyHandlers.ofString())
