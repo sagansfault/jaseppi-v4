@@ -28,7 +28,7 @@ public class Jaseppi {
     private final DefaultAudioPlayerManager audioPlayerManager;
     private final JaseppiAudioPlayer audioPlayer;
     private final AudioSource audioSource;
-    private final SoundCloudAudioSourceManager youtubeAudioSourceManager;
+    private final YoutubeAudioSourceManager youtubeAudioSourceManager;
 
     private final CommandManager commandManager;
     private final HttpClient httpClient;
@@ -39,7 +39,7 @@ public class Jaseppi {
         commandManager = new CommandManager();
         httpClient = HttpClient.newBuilder().build();
         audioPlayerManager = new DefaultAudioPlayerManager();
-        youtubeAudioSourceManager = SoundCloudAudioSourceManager.builder().withAllowSearch(true).build();
+        youtubeAudioSourceManager = new YoutubeAudioSourceManager(true);
         audioPlayerManager.registerSourceManager(youtubeAudioSourceManager);
         audioPlayer = new JaseppiAudioPlayer(audioPlayerManager);
         audioSource = new LavaplayerAudioSource(api, audioPlayer);
@@ -89,7 +89,7 @@ public class Jaseppi {
         return audioSource;
     }
 
-    public SoundCloudAudioSourceManager getYoutubeAudioSourceManager() {
+    public YoutubeAudioSourceManager getYoutubeAudioSourceManager() {
         return youtubeAudioSourceManager;
     }
 }
