@@ -2,6 +2,7 @@ package sh.sagan.jaseppi;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.soundcloud.SoundCloudAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.audio.AudioSource;
@@ -27,7 +28,7 @@ public class Jaseppi {
     private final DefaultAudioPlayerManager audioPlayerManager;
     private final JaseppiAudioPlayer audioPlayer;
     private final AudioSource audioSource;
-    private final YoutubeAudioSourceManager youtubeAudioSourceManager;
+    private final SoundCloudAudioSourceManager youtubeAudioSourceManager;
 
     private final CommandManager commandManager;
     private final HttpClient httpClient;
@@ -38,7 +39,7 @@ public class Jaseppi {
         commandManager = new CommandManager();
         httpClient = HttpClient.newBuilder().build();
         audioPlayerManager = new DefaultAudioPlayerManager();
-        youtubeAudioSourceManager = new YoutubeAudioSourceManager(true);
+        youtubeAudioSourceManager = SoundCloudAudioSourceManager.builder().withAllowSearch(true).build();
         audioPlayerManager.registerSourceManager(youtubeAudioSourceManager);
         audioPlayer = new JaseppiAudioPlayer(audioPlayerManager);
         audioSource = new LavaplayerAudioSource(api, audioPlayer);
@@ -88,7 +89,7 @@ public class Jaseppi {
         return audioSource;
     }
 
-    public YoutubeAudioSourceManager getYoutubeAudioSourceManager() {
+    public SoundCloudAudioSourceManager getYoutubeAudioSourceManager() {
         return youtubeAudioSourceManager;
     }
 }

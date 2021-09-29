@@ -57,7 +57,7 @@ public class PlayCommand extends Command {
     private void load(Message message, String linkOrSearch) {
         String query = linkOrSearch;
         if (!linkOrSearch.startsWith("http")) {
-            query = "ytmsearch:" + linkOrSearch;
+            query = "scsearch:" + linkOrSearch;
         }
         String finalQuery = query;
         message.getServer().ifPresent(server -> jaseppi.getAudioPlayerManager().loadItemOrdered(server, finalQuery, new AudioLoadResultHandler() {
