@@ -3,6 +3,8 @@ package sh.sagan.jaseppi.command.impl;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.javacord.api.entity.channel.ChannelCategory;
+import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.Message;
 import sh.sagan.jaseppi.command.lib.Command;
 
@@ -10,6 +12,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RedditCommand extends Command {
@@ -53,7 +56,21 @@ public class RedditCommand extends Command {
                     JsonArray children = data.getAsJsonArray("children");
                     JsonObject randomPost = children.get(ThreadLocalRandom.current().nextInt(1, 10)).getAsJsonObject();
                     JsonObject childData = randomPost.getAsJsonObject("data");
+                    boolean over18 = childData.getAsJsonPrimitive("over_18").getAsBoolean();
+                    TextChannel channel = message.getChannel();
+                    if (over18) {
+                        Optional<ChannelCategory> categoryOpt = channel.asChannelCategory();
+                        if (categoryOpt.isEmpty()) {
+                            channel.sendMessage("discord broke");
+                            return;
+                        }
+                        if (!categoryOpt.get().isNsfw()) {
+                            channel.sendMessage("run that shit in an nsfw");
+                            return;
+                        }
+                    }
                     message.getChannel().sendMessage(childData.getAsJsonPrimitive("url").getAsString());
+                    message.delete();
                 });
     }
 }
