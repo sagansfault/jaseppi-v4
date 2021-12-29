@@ -85,7 +85,7 @@ public class PlayCommand extends Command {
                 isUrl ? linkOrQuery : "ytsearch:" + linkOrQuery,
                 new FunctionalResultHandler(track -> {
                     trackManager.queue(track);
-                    textChannel.sendMessage("Queued" + (isUrl ? "it" : ": " + track.getInfo().uri));
+                    textChannel.sendMessage("Queued" + (isUrl ? " it" : ": " + track.getInfo().uri));
                 }, playlist -> {
                     // fuck playlists
                     AudioTrack first = playlist.getTracks().get(0);

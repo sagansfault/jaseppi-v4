@@ -44,7 +44,7 @@ public class TrackManager extends AudioEventAdapter {
     }
 
     public void startNext() {
-        player.startTrack(queue.isEmpty() ? null : queue.remove(0), true);
+        player.startTrack(queue.isEmpty() ? null : queue.remove(0), false);
     }
 
     @Override
