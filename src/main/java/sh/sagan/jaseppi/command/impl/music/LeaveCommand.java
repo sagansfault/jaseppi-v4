@@ -20,6 +20,7 @@ public class LeaveCommand extends Command {
                 server.getAudioConnection().ifPresent(audioConnection -> {
                     jaseppi.getAudioPlayer().stopTrack();
                     audioConnection.close();
+                    jaseppi.getTrackManager().clearQueue();
                 });
             });
         });

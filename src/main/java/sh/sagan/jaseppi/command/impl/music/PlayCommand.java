@@ -89,6 +89,7 @@ public class PlayCommand extends Command {
                 }, playlist -> {
                     // fuck playlists
                     AudioTrack first = playlist.getTracks().get(0);
+                    trackManager.queue(first);
                     textChannel.sendMessage("Queued" + (isUrl ? " it" : ": " + first.getInfo().uri));
                 }, () -> {
                     textChannel.sendMessage("No matches found");

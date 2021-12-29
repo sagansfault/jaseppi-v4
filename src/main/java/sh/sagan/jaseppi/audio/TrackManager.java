@@ -31,6 +31,10 @@ public class TrackManager extends AudioEventAdapter {
         }
     }
 
+    public void clearQueue() {
+        this.queue.clear();
+    }
+
     public void setRepeat(boolean repeat) {
         this.repeat = repeat;
     }
