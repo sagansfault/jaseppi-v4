@@ -1,4 +1,4 @@
-package sh.sagan.jaseppi;
+package sh.sagan.jaseppi.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
@@ -11,6 +11,12 @@ public class LavaplayerAudioSource extends AudioSourceBase {
     private final AudioPlayer audioPlayer;
     private AudioFrame lastFrame;
 
+    /**
+     * Creates a new lavaplayer audio source.
+     *
+     * @param api A discord api instance.
+     * @param audioPlayer An audio player from Lavaplayer.
+     */
     public LavaplayerAudioSource(DiscordApi api, AudioPlayer audioPlayer) {
         super(api);
         this.audioPlayer = audioPlayer;

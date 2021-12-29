@@ -2,6 +2,7 @@ package sh.sagan.jaseppi;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.intent.Intent;
 
 public class Entry {
 
@@ -10,7 +11,10 @@ public class Entry {
             System.out.println("!!! MISSING TOKEN !!!");
             return;
         }
-        DiscordApi api = new DiscordApiBuilder().setToken(args[0]).login().join();
+        DiscordApi api = new DiscordApiBuilder().setToken(args[0])
+                .setAllNonPrivilegedIntents()
+                .login()
+                .join();
 
         new Jaseppi(api);
     }
