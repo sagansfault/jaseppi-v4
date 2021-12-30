@@ -16,6 +16,13 @@ public class SkipCommand extends Command {
 
     @Override
     public void run(Message message, String[] args) {
+
+        // Gator banned from dj commands except 'play'
+        if (message.getAuthor().getId() == 160339567747137536L) {
+            message.reply("https://media1.giphy.com/media/wSSooF0fJM97W/200.gif");
+            return;
+        }
+
         message.getServer().flatMap(Server::getAudioConnection).ifPresent(audioConnection -> {
             jaseppi.getTrackManager().startNext();
         });

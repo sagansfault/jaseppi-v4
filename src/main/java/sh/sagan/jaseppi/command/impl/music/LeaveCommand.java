@@ -15,6 +15,13 @@ public class LeaveCommand extends Command {
 
     @Override
     public void run(Message message, String[] args) {
+
+        // Gator banned from dj commands except 'play'
+        if (message.getAuthor().getId() == 160339567747137536L) {
+            message.reply("https://media1.giphy.com/media/wSSooF0fJM97W/200.gif");
+            return;
+        }
+
         message.getServer().ifPresent(server -> {
             jaseppi.getApi().getYourself().getConnectedVoiceChannel(server).ifPresent(serverVoiceChannel -> {
                 server.getAudioConnection().ifPresent(audioConnection -> {
