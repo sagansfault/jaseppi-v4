@@ -7,6 +7,7 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import org.javacord.api.DiscordApi;
 import sh.sagan.jaseppi.audio.TrackManager;
 import sh.sagan.jaseppi.command.impl.RedditCommand;
+import sh.sagan.jaseppi.command.impl.RollDiceCommand;
 import sh.sagan.jaseppi.command.impl.SayCommand;
 import sh.sagan.jaseppi.command.impl.music.LeaveCommand;
 import sh.sagan.jaseppi.command.impl.music.PlayCommand;
@@ -16,7 +17,6 @@ import sh.sagan.jaseppi.command.lib.CommandManager;
 import sh.sagan.jaseppi.command.lib.IntakeDelegator;
 import sh.sagan.jaseppi.function.CursedImageReply;
 
-import javax.sound.midi.Track;
 import java.net.http.HttpClient;
 
 public class Jaseppi {
@@ -60,6 +60,7 @@ public class Jaseppi {
         commandManager.register(new SkipCommand(this));
         commandManager.register(new LeaveCommand(this));
         commandManager.register(new RepeatCommand(this));
+        commandManager.register(new RollDiceCommand(this));
     }
 
     public DiscordApi getApi() {
