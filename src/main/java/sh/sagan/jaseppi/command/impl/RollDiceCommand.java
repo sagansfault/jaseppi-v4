@@ -27,31 +27,34 @@ public class RollDiceCommand extends Command {
         }
 
         if (args.length < 1) {
-            message.reply("I need something like '!roll 4d6'");
+            message.reply("I need something like '!roll 4d6' or '!roll 6d2+3'");
             return;
         }
 
         String arg = args[0];
-        String[] parts = arg.split("d");
-        if (parts.length != 2) {
-            message.reply("I need something like '!roll 4d6'");
+        String[] parts = arg.split("d|\\+");
+        if (parts.length < 2) {
+            message.reply("I need something like '!roll 4d6' or '!roll 6d2+3'");
             return;
         }
         String countString = parts[0];
         String facesCountString = parts[1];
+        String addString = parts.length >= 3 ? parts[2] : "0";
 
         int count;
         int faces;
+        int add;
         try {
             count = Integer.parseInt(countString);
             faces = Integer.parseInt(facesCountString);
+            add = Integer.parseInt(addString);
         } catch (NumberFormatException ignored) {
-            message.reply("I need something like '!roll 4d6'");
+            message.reply("I need something like '!roll 4d6' or '!roll 6d2+3'");
             return;
         }
 
-        if (count > 50 || count < 1 || faces < 2) {
-            message.reply("Number of dice has to be between 1 and 50. Number of faces has to be more than 1");
+        if (count > 50 || count < 1 || faces < 2 || faces > 1000 || Math.abs(add) > 1000) {
+            message.reply("Number of dice has to be between 1 and 50. Number of faces has to be between 1 and 1000. Add cannot be more than 1000");
             return;
         }
 
@@ -62,7 +65,12 @@ public class RollDiceCommand extends Command {
             results[i] = result;
             sum += result;
         }
+        sum += add;
 
-        message.reply("You rolled: `" + Arrays.toString(results) + "` Total: `" + sum + "`");
+        if (add == 0) {
+            message.reply("You rolled: `" + Arrays.toString(results) + "` Total: `" + sum + "`");
+        } else {
+            message.reply("You rolled: `" + Arrays.toString(results) + " + " + add + "` Total: `" + sum + "`");
+        }
     }
 }
