@@ -6,6 +6,7 @@ import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 import org.javacord.api.DiscordApi;
 import sh.sagan.jaseppi.audio.TrackManager;
+import sh.sagan.jaseppi.command.impl.RandomFactCommand;
 import sh.sagan.jaseppi.command.impl.RedditCommand;
 import sh.sagan.jaseppi.command.impl.RollDiceCommand;
 import sh.sagan.jaseppi.command.impl.SayCommand;
@@ -55,6 +56,7 @@ public class Jaseppi {
     private void initCommands() {
         commandManager.register(new SayCommand());
         commandManager.register(new RedditCommand(this.httpClient));
+        commandManager.register(new RandomFactCommand(this.httpClient));
 
         commandManager.register(new PlayCommand(this));
         commandManager.register(new SkipCommand(this));

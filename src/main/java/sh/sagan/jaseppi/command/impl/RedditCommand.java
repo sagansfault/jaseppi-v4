@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RedditCommand extends Command {
 
-    private final String urlFormat = "https://www.reddit.com/r/%s/%s.json?limit=%s";
+    private static final String URL_FORMAT = "https://www.reddit.com/r/%s/%s.json?limit=%s";
     private final String[] notAllowedSubs = {"gay", "men", "man", "dick", "cock", "hole", "disgusting", "poop", "feet",
             "shit", "homo", "disease", "penis", "male", "guy", "foot"};
 
@@ -46,7 +46,7 @@ public class RedditCommand extends Command {
             }
         }
 
-        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(String.format(urlFormat, sub, "hot", "10"))).build();
+        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(String.format(URL_FORMAT, sub, "hot", "10"))).build();
 
         httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)

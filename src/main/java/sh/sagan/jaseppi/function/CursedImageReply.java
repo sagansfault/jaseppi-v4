@@ -22,7 +22,7 @@ public class CursedImageReply implements MessageCreateListener {
 
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
-        int rand = ThreadLocalRandom.current().nextInt(100);
+        int rand = ThreadLocalRandom.current().nextInt(1000);
 
         String urlFormat = "https://www.reddit.com/r/%s/%s.json?limit=%s";
 
